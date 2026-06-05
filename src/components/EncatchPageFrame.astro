@@ -1,0 +1,13 @@
+---
+import Default from '@astrojs/starlight/components/PageFrame.astro';
+import { EncatchInit } from './EncatchInit';
+
+const locale = Astro.currentLocale === 'root' ? 'en' : (Astro.currentLocale ?? 'en');
+---
+
+<Default>
+	<slot />
+	<Fragment slot="header"><slot name="header" /></Fragment>
+	<Fragment slot="sidebar"><slot name="sidebar" /></Fragment>
+</Default>
+<EncatchInit client:load locale={locale} />

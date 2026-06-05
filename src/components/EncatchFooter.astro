@@ -1,0 +1,23 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { DocsPageFeedback } from './DocsPageFeedback';
+
+const { entry, id } = Astro.locals.starlightRoute;
+const locale = Astro.currentLocale === 'root' ? 'en' : (Astro.currentLocale ?? 'en');
+const isDocPage = id !== undefined;
+---
+
+{isDocPage && (
+	<DocsPageFeedback
+		client:load
+		pageUrl={Astro.url.pathname}
+		pageTitle={entry.data.title}
+		locale={locale}
+		helpfulQuestion={Astro.locals.t('docsFeedback.helpfulQuestion')}
+		yes={Astro.locals.t('docsFeedback.yes')}
+		no={Astro.locals.t('docsFeedback.no')}
+		suggestEdits={Astro.locals.t('docsFeedback.suggestEdits')}
+		raiseIssue={Astro.locals.t('docsFeedback.raiseIssue')}
+	/>
+)}
+<Default><slot /></Default>
