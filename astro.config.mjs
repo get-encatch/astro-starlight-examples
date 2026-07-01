@@ -19,12 +19,12 @@ export default defineConfig({
 				{
 					icon: 'github',
 					label: 'GitHub',
-					href: 'https://github.com/get-encatch/starlight-examples',
+					href: 'https://github.com/get-encatch/astro-starlight-examples',
 				},
 			],
 			editLink: {
 				baseUrl:
-					'https://github.com/get-encatch/starlight-examples/edit/main/src/content/docs/',
+					'https://github.com/get-encatch/astro-starlight-examples/edit/main/src/content/docs/',
 			},
 			defaultLocale: 'root',
 			locales: {
