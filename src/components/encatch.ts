@@ -11,6 +11,35 @@ import type { Theme } from '@encatch/web-sdk';
 
 type DocumentationFeedbackRoute = 'page-helpful' | 'suggest-edit' | 'raise-issue';
 
+function trimEnv(value: string | undefined): string | undefined {
+	const trimmed = value?.trim();
+	return trimmed || undefined;
+}
+
+function toEncatchHostUrl(value: string | undefined): string | undefined {
+	const trimmed = trimEnv(value);
+	if (!trimmed) {
+		return undefined;
+	}
+	if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+		return trimmed;
+	}
+	return `https://${trimmed}`;
+}
+
+function buildEncatchInitConfig(options?: { theme?: Theme }): import('@encatch/web-sdk').EncatchConfig {
+	const config: import('@encatch/web-sdk').EncatchConfig = { theme: options?.theme ?? 'system' };
+	const webHost = toEncatchHostUrl(import.meta.env.PUBLIC_ENCATCH_WEB_HOST);
+	const apiHost = toEncatchHostUrl(import.meta.env.PUBLIC_ENCATCH_API_HOST);
+	if (webHost) {
+		config.webHost = webHost;
+	}
+	if (apiHost) {
+		config.apiBaseUrl = apiHost;
+	}
+	return config;
+}
+
 function getDocumentationFeedbackEnv() {
 	return {
 		formSlug: import.meta.env.PUBLIC_ENCATCH_DOCUMENTATION_FEEDBACK_FORM_SLUG?.trim(),
@@ -36,7 +65,7 @@ export function ensureEncatchInitialized(options?: { theme?: Theme }): boolean {
 	if (!_encatch._initialized) {
 		try {
 			const theme: Theme = options?.theme ?? 'system';
-			_encatch.init(apiKey, { theme });
+			_encatch.init(apiKey, buildEncatchInitConfig(options));
 		} catch (error) {
 			console.error('Encatch init failed:', error);
 			return false;
