@@ -3,7 +3,7 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 import { DocsPageFeedback } from './DocsPageFeedback';
 
 const { entry, id } = Astro.locals.starlightRoute;
-const locale = Astro.currentLocale === 'root' ? 'en' : (Astro.currentLocale ?? 'en');
+const locale = 'en';
 const isDocPage = id !== undefined;
 ---
 
