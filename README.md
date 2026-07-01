@@ -32,7 +32,7 @@ pnpm install
 pnpm dev
 ```
 
-Docs at http://localhost:3000/ (English) and http://localhost:3000/es/ (Spanish).
+Docs at http://localhost:3000/
 
 ## Encatch integration
 
