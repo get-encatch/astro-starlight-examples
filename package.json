@@ -15,7 +15,7 @@
     "@playwright/test": "^1.51.0"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.7",
+    "@astrojs/react": "^6.0.1",
     "@astrojs/starlight": "^0.39.3",
     "@encatch/web-sdk": "^1.4.0",
     "@types/react": "^19.2.16",
